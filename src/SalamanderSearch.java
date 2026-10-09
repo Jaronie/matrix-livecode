@@ -46,4 +46,15 @@ public class SalamanderSearch {
     public static boolean canReach(char[][] enclosure) {
         return false;
     }
+
+    public static int[] salamanderLocation(char[][] enclosure) {
+        for(int row = 0; row < enclosure.length; row++){
+            for(int column = 0; column < enclosure[row].length; column++){
+                if(enclosure[row][column] == 's') {
+                    return new int[] {row,column};
+                }
+            }
+        }
+        throw new IllegalArgumentException("Enclosure doesn't contain salamander");
+    }
 }
