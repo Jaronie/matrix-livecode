@@ -57,4 +57,47 @@ public class SalamanderSearch {
         }
         throw new IllegalArgumentException("Enclosure doesn't contain salamander");
     }
+
+    public static List<int[]> possibleMoves(char[][] enclosure, int[] current) {
+        int curX = current[0];
+        int curY = current[1];
+
+        int newX, newY;
+        List<int[]> possible = new ArrayList<>();
+
+        // check Up move
+        newX = curX - 1;
+        newY = curY;
+
+        if(newX >= 0 && enclosure[newX][newY] != 'W') {
+            possible.add(new int[]{newX,newY});
+        }
+
+        //check Down move
+        newX = curX + 1;
+        newY = curY;
+        if(newX < enclosure.length && enclosure[newX][newY] != 'W'){
+            possible.add(new int[]{newX, newY});
+        }
+
+        //check Left move
+        newX = curX;
+        newY = curY - 1;
+
+        if(newY >= 0 && enclosure[newX][newY] != 'W'){
+            possible.add(new int[]{newX, newY});
+        }
+
+        //check Right move
+        newX = curX;
+        newY = curY + 1;
+        if(newY < enclosure[newX].length && enclosure[newX][newY] != 'W'){
+            possible.add(new int[]{newX, newY});
+        }
+
+        
+    return possible;
+    
+    }
+
 }
