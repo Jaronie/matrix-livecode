@@ -44,7 +44,28 @@ public class SalamanderSearch {
      * @throws IllegalArgumentException if the enclosure does not contain a salamander
      */
     public static boolean canReach(char[][] enclosure) {
+        int[] start = salamanderLocation(enclosure);
+        boolean[][] visited = new boolean[enclosure.length][enclosure[0].length];
+        return canReach(enclosure, visited, start);
+    }
+
+    public static boolean canReach(char[][] enclosure, boolean[][] visited, int[] current) {
+        int curX = current[0];
+        int curY = current[1];
+        if(visited[curX][curY]) return false;
+        if(enclosure[curX][curY] == 'f') return true;
+
+        visited[curX][curY] = true;
+
+        List<int[]> neighbors = possibleMoves(enclosure, current);
+
+        for(int[] neighbor : neighbors){
+           if(canReach(enclosure, visited, neighbor)) {
+            return true;
+           }
+        }
         return false;
+
     }
 
     public static int[] salamanderLocation(char[][] enclosure) {
@@ -55,7 +76,7 @@ public class SalamanderSearch {
                 }
             }
         }
-        throw new IllegalArgumentException("Enclosure doesn't contain salamander");
+        throw new IllegalArgumentException("No salamander present");
     }
 
     public static List<int[]> possibleMoves(char[][] enclosure, int[] current) {
@@ -97,7 +118,7 @@ public class SalamanderSearch {
 
         
     return possible;
-    
+
     }
 
 }
